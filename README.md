@@ -8,18 +8,18 @@
 - 購入機能
 
 # 使用技術
-- 言語
+## 言語
   - Ruby 2.5.1
-- フレームワーク
-  Ruby on Rails 5.2.4.3
-- データベース
-  MySQL 5.6.47
-- インフラ
+## フレームワーク
+  - Ruby on Rails 5.2.4.3
+## データベース
+  - MySQL 5.6.47
+## インフラ
   - AWS EC2
   - AWS S3
 
 # ER図
-  ()
+  (https://cacoo.com/diagrams/cSWPeLtOCobnrLMg/CFF24)
 
 #  DB設計
 ## userテーブル
