@@ -1,16 +1,38 @@
 # README
+#　アプリケーション概要
+フリーマーケットのアプリケーションの開発です。メルカりを参考にしています。４人でアジャイル開発を行います。
+
+# 機能一覧
+- ユーザー新規登録、ログイン、ログイン（メールアドレスのみ）
+- 商品出品
+- 購入機能
+
+# 使用技術
+- 言語
+  - Ruby 2.5.1
+- フレームワーク
+  Ruby on Rails 5.2.4.3
+- データベース
+  MySQL 5.6.47
+- インフラ
+  - AWS EC2
+  - AWS S3
+
+# ER図
+  ()
 
 #  DB設計
 ## userテーブル
 |column|Type|Option|
 |------|----|------|
-|nick_name|string|null: false|
-|e-mail|string|null: false|
-|password|string|null: false|
+|nickname|string|null: false|
+|e-mail|string|null: false,unique: true, index:true|
+|password|string|null: false, length:{minimu:6}|
+|password_conform|string|null:false|
 ### Association
-- has_many : items
-- has_one : profile, dependent: :destroy
-- has_one : credit_card, dependent: :destroy
+- has_many : items,dependent:delete_all
+- has_one : profile, dependent: :delete
+- has_one : credit_card, dependent: :delete
 
 ## profileテーブル
 |column|Type|Option|
@@ -21,15 +43,16 @@
 |first_name_kana|string|null: false|
 |family_name_kana|string|null: false|
 |birthday|integer|null: false|
+|introduction|text||
 |post_number|integer|null: false|
 |prefecture|string|null: false|
 |city|string|null: false|
 |house_number|string|null: false|
 |building_name|string||
+|user|references|null:false,foreign_key:true|
 
 ### Association
 - belongs_to : user
-- has_many : items 
 
 ## credit_cardテーブル
 |column|Type|Option|
@@ -41,7 +64,7 @@
 |security_code|integer|null: false|
 
 ### Association
-- belongs_to : messages
+- belongs_to : user
 
 ## itemテーブル
 |column|Type|Option|
@@ -51,17 +74,16 @@
 |price|integer|null: false|
 |shipment_date|string|null: false|
 |shipment_pref|string|null: false|
-|category_name|string|null: false, foreign_key: true|
+|category|reference|null: false, foreign_key: true|
 |brand|string|null: false|
 |item_status|string|null: false|
 |shipment_fee|string|null: false|
 |seller|reference|null: false, foreign_key: true|
 |buyer|reference|foreign_key: true|
 |prefecture|string|null: false|
-|item_img|integer|null: false, foreign_key: true|
+|item_img|reference|null: false, foreign_key: true|
 ### Association
-- belongs_to : seller class_name: "User"
-- belongs_to : buyer class_name: "User"
+- belongs_to : user
 - belongs_to : category
 - had_many: item_imgs, dependent::destroy
 
