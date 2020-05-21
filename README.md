@@ -19,7 +19,7 @@
   - AWS S3
 
 # ER図
-  (https://cacoo.com/diagrams/cSWPeLtOCobnrLMg/CFF24)
+  https://gyazo.com/10c37b3245ddfb45cd625c850661abb8
 
 #  DB設計
 ## userテーブル
